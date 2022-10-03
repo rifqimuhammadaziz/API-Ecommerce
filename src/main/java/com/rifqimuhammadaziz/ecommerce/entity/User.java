@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     @Id
-    private String username;
+    private String id;
     private String password;
     private String fullName;
     private String address;
