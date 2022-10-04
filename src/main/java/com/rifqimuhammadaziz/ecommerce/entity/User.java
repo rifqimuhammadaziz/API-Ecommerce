@@ -1,5 +1,6 @@
 package com.rifqimuhammadaziz.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ public class User implements Serializable {
 
     @Id
     private String id;
+    @JsonIgnore
     private String password;
     private String fullName;
     private String address;

@@ -3,12 +3,14 @@ package com.rifqimuhammadaziz.ecommerce.controller;
 import com.rifqimuhammadaziz.ecommerce.entity.Category;
 import com.rifqimuhammadaziz.ecommerce.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api")
 public class CategoryController {
 
