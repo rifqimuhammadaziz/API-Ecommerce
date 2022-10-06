@@ -19,6 +19,9 @@ public class JWTUtils {
     @Value("${jwt.expiration-time}") // read application properties
     private int jwtExpirationTime;
 
+    @Value("${jwt.refresh-expiration-time}") // read application properties
+    private int refreshJwtExpirationTime;
+
     @Value("${jwt.secret}") // read application properties
     private String jwtSecret;
 
@@ -45,6 +48,15 @@ public class JWTUtils {
         return Jwts.builder().setSubject(principal.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationTime))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
+    public String generateRefreshJwtToken(Authentication authentication) {
+        UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
+        return Jwts.builder().setSubject(principal.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + refreshJwtExpirationTime))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
